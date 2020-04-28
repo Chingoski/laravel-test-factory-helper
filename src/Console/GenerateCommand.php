@@ -367,7 +367,7 @@ class GenerateCommand extends Command
         if ($table === null) {
             return "[]";
         }
-        if (env('DB_HOST') == 'postgres') {
+        if (env('DB_CONNECTION') == 'pgsql') {
             $type = DB::select(DB::raw('SELECT column_name,data_type FROM information_schema.columns WHERE table_name = \'' . $table . '\' AND column_name = \'' . $name . '\''))[0]->data_type;
         } else {
             $type = DB::select(DB::raw('SHOW COLUMNS FROM ' . $table . ' WHERE Field = "' . $name . '"'))[0]->Type;
